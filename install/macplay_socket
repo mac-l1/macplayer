@@ -1,0 +1,4 @@
+#!/bin/bash
+set -x
+
+socat -T1 - udp4-listen:$1,reuseaddr,fork | macplayer "$3" 2>&1 | $(socat - udp-sendto:127.0.0.1:$2; ps -ef| grep $1|awk '{print $2}'|xargs kill -9)

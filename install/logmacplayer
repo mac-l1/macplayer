@@ -1,0 +1,2 @@
+#!/bin/bash
+socat -T1 - udp4-listen:60606,reuseaddr,fork
