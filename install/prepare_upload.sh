@@ -1,10 +1,8 @@
 #!/bin/bash
+set -ex
 
-VERSION=v1.0
+VERSION=v0.1
 rm -rf $VERSION
 mkdir -p $VERSION
-cp /usr/local/sbin/macplay* .
-cp /usr/local/sbin/set*.sh .
-cp /usr/local/bin/macplayer .
-cp /usr/lib/cgi-bin/macplay.cgi .
-cp * $VERSION
+cp * $VERSION||true
+rm $VERSION/prepare_upload.sh

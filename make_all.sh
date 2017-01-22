@@ -15,12 +15,12 @@ cd mindroid
 ./make.sh $@
 cd $SCRIPT_DIR
 
-cd macplayer
-make -j5 $@
+cd macffplay
+./make.sh $@
 cd $SCRIPT_DIR
 
 cd install
-./installmacplayer.sh
+#./installmacplayer.sh
 cd $SCRIPT_DIR
 
 exit
