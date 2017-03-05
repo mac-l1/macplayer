@@ -5,20 +5,20 @@ VERSION=3.2
 
 MYDIR=$(cd $(dirname $0); pwd)
 cd $MYDIR
-FFMPEG_PREFIX=${MYDIR}/ffmpeg-install-${VERSION}
+FFMPEG_PREFIX=${MYDIR}/ffmpeg-install
 
 if [ $(echo $@|grep -w "clean"|wc -l) != "0" ]; then
-    rm -rf ffmpeg-${VERSION} ffmpeg-install-${VERSION}
+    rm -rf ffmpeg-${VERSION} ffmpeg-install
     exit 0
 fi
 
-if [ -d "ffmpeg-install-${VERSION}" ]; then
+if [ -d "ffmpeg-install" ]; then
     echo "ffmpeg already built; done."
     exit 0
 fi
 
 if [ ! -d "ffmpeg-${VERSION}" ]; then
-    sudo apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev libx264-dev libfdk-aac-dev libmp3lame-dev libopus-dev curl libvpx-dev
+    sudo apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo zlib1g-dev libx264-dev libfdk-aac-dev libmp3lame-dev libopus-dev curl
 
     if [ ! -e "ffmpeg-${VERSION}.tar.xz" ]; then
         curl -O http://ffmpeg.org/releases/ffmpeg-${VERSION}.tar.xz
@@ -30,7 +30,7 @@ if [ ! -d "ffmpeg-${VERSION}" ]; then
 
     CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" \
     ./configure --prefix=$FFMPEG_PREFIX \
-	--extra-version="macffplay-${VERSION}" \
+	--extra-version="macplayer-${VERSION}" \
         --pkg-config-flags="--static" \
 	--enable-ffplay \
 	--disable-ffmpeg \
@@ -44,7 +44,6 @@ if [ ! -d "ffmpeg-${VERSION}" ]; then
 	--enable-encoder=all \
 	--enable-decoder=all \
 	--enable-protocol=all \
-	--disable-devices \
         --enable-libass \
         --enable-libfdk-aac \
         --enable-libfreetype \

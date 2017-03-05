@@ -1,0 +1,41 @@
+#!/bin/bash
+set -x
+
+SOCKIN=50505
+SOCKOUT=60606
+
+echo "<br>"
+if [ -z "$1" ]; then 
+    echo "$0: no input given! <br>"
+elif [ ${#1} = 1 ]; then
+    echo "$0: command '$1' <br>"
+    if [ $(ps -ef|grep macplayer|wc -l) = 1 ]; then
+        echo "$0: macplayer not running, not sending command! <br>"
+    else
+        echo -n "$1"|socat - udp-sendto:127.0.0.1:$SOCKIN
+    fi
+else
+
+echo "$0: play '$1' <br>"
+if ! [ $(ps -ef|grep macplayer|wc -l) = 1 ]; then
+    echo "$0: macplayer already running, stopping it first! then play<br>"
+    echo -n "q"|socat - udp-sendto:127.0.0.1:$SOCKIN
+    sleep 2
+fi
+
+# kill 'm all
+sudo pkill -9 macplayer
+sudo pkill -9 surfaceflinger
+
+# player args
+FILE="$1"
+#FILE=http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/0640/06401.ts
+BIN=/usr/local/bin/macplayer
+
+#screen -d -m sudo su -c "EGL_PLATFORM=surfaceflinger $BIN '$FILE'"
+screen -d -m sudo su -c "macplay_socket $SOCKIN $SOCKOUT '$FILE'"
+
+fi
+
+export DISPLAY=:0.0
+xrefresh || true
