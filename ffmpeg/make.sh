@@ -23,6 +23,9 @@ if [ ! -d "ffmpeg-${VERSION}" ]; then
     if [ ! -e "ffmpeg-${VERSION}.tar.xz" ]; then
         curl -O http://ffmpeg.org/releases/ffmpeg-${VERSION}.tar.xz
     fi
+    if [ ! -e "ffmpeg-${VERSION}.tar.xz" ]; then
+        wget http://ffmpeg.org/releases/ffmpeg-${VERSION}.tar.xz
+    fi
     tar xf ffmpeg-${VERSION}.tar.xz
     cd ffmpeg-${VERSION} || exit 2
 

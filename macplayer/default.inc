@@ -23,7 +23,7 @@ CXXFLAGS =
 LDFLAGS  = -L/usr/local/lib/ -L../ffmpeg/ffmpeg-install/lib/
 
 # Flags to be passed to the linker, after the listing of object files.
-LDLIBS   = -pthread -lsync -lmedia -lhybris-common -lis -lEGL -lGLESv2 -lsf -lSDL2 ../ffmpeg/ffmpeg-install/lib/libavdevice.a ../ffmpeg/ffmpeg-install/lib/libavfilter.a ../ffmpeg/ffmpeg-install/lib/libavformat.a ../ffmpeg/ffmpeg-install/lib/libavcodec.a ../ffmpeg/ffmpeg-install/lib/libpostproc.a ../ffmpeg/ffmpeg-install/lib/libswresample.a ../ffmpeg/ffmpeg-install/lib/libswscale.a ../ffmpeg/ffmpeg-install/lib/libavutil.a $(shell find /home/rock/macplayer/mindroid/Mindroid.cpp -name "*.o") $(shell PKG_CONFIG_PATH="/home/rock/macplayer/ffmpeg/ffmpeg-install/lib/pkgconfig" pkg-config --static --libs-only-l --silence-errors libavcodec)
+LDLIBS   = -pthread -lsync -lmedia -lhybris-common -lis -lEGL -lGLESv2 -lsf -lSDL2 ../ffmpeg/ffmpeg-install/lib/libavdevice.a ../ffmpeg/ffmpeg-install/lib/libavfilter.a ../ffmpeg/ffmpeg-install/lib/libavformat.a ../ffmpeg/ffmpeg-install/lib/libavcodec.a ../ffmpeg/ffmpeg-install/lib/libpostproc.a ../ffmpeg/ffmpeg-install/lib/libswresample.a ../ffmpeg/ffmpeg-install/lib/libswscale.a ../ffmpeg/ffmpeg-install/lib/libavutil.a $(shell find `pwd`/../mindroid/Mindroid.cpp -name "*.o") $(shell PKG_CONFIG_PATH="`pwd`/../ffmpeg/ffmpeg-install/lib/pkgconfig" pkg-config --static --libs-only-l --silence-errors libavcodec)
 
 # A list of directories containing source files containing "int
 # main()".  Each file will be compiled into a separate executable.

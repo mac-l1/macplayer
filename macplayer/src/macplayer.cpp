@@ -91,9 +91,6 @@ extern "C" int hybris_codec_decode(void* vpHybrisCodec, AVCodecContext *avctx, A
     unsigned char *data = NULL;
     unsigned int pkt_size = 0;
 
-    memset(&videoPacket, 0, sizeof(VideoPacket_t));
-    pkt = &videoPacket;
-    pkt->data = NULL;
     pkt->pts = VPU_API_NOPTS_VALUE;
     pkt->dts = VPU_API_NOPTS_VALUE;
 
@@ -180,6 +177,12 @@ extern "C" void* hybris_codec_open(enum AVCodecID codec_id, int width, int heigh
         ERROR("Can't open hybris codec");
         return NULL;
     }
+
+    memset(&videoPacket, 0, sizeof(VideoPacket_t));
+    pkt = &videoPacket;
+    pkt->data = NULL;
+    pkt->pts = VPU_API_NOPTS_VALUE;
+    pkt->dts = VPU_API_NOPTS_VALUE;
 
     /// texture has been created
     textureID = pHybrisCodec->GetTextureID();

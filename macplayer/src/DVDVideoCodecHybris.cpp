@@ -146,6 +146,8 @@ public:
   }
 };
 
+static int mci_new = 0, mci_delete = 0;
+
 CDVDMediaCodecInfo::CDVDMediaCodecInfo( int index, unsigned int texture,
   MediaCodecDelegate codec, GLConsumerWrapperHybris surfacetexture,
   std::shared_ptr<CDVDMediaCodecOnFrameAvailable> &frameready)
@@ -165,11 +167,16 @@ CDVDMediaCodecInfo::CDVDMediaCodecInfo( int index, unsigned int texture,
   assert(m_codec != NULL);
   assert(m_surfacetexture != NULL);
   assert(m_frameready != NULL);
+
+  mci_new++;
+  INFO( "%s::%s::%d - #total = %d, #new = %d, #del = %d", CLASSNAME, __func__, __LINE__, mci_new - mci_delete, mci_new, mci_delete);
 }
 
 CDVDMediaCodecInfo::~CDVDMediaCodecInfo() {
   REPORT_FUNCTION();
   assert(m_refs == 0);
+  mci_delete++;
+  INFO( "%s::%s::%d - #total = %d, #new = %d, #del = %d", CLASSNAME, __func__, __LINE__, mci_new - mci_delete, mci_new, mci_delete);
 }
 
 CDVDMediaCodecInfo* CDVDMediaCodecInfo::Retain() {
